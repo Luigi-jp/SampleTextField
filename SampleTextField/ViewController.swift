@@ -9,11 +9,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        textField.delegate = self
     }
-
-
+    
+    // textField以外をタップしたらキーボードを非表示にする
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
+extension ViewController: UITextFieldDelegate {
+    // returnキーを押したらキーボードを非表示にする
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+}
